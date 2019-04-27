@@ -9,3 +9,53 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+//////////////////////////
+// ↓↓↓custom
+
+// cursor
+.cursor {
+  cursor: pointer;
+}
+
+// side-menu
+.split-pane-md.split-pane-visible > .split-pane-side {
+  min-width: 250px;
+  max-width: 20%;
+}
+.imenu-header {
+  height: 97px;
+  background-image: url('assets/img/sign-in.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.side-menu-back-btn {
+  width: 42px;
+  height: 32px;
+
+  button {
+    margin: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 42px;
+    height: 32px;
+
+    ion-icon {
+      margin: 0px;
+      padding: 0px;
+      width: 26px;
+      height: 32px;
+    }
+  }
+}
+
+// ion-list-header
+ion-list-header{
+  --background: var(--custom-color-lightgray);
+}
+
+// user-select
+.user-select {
+  user-select: text;
+}

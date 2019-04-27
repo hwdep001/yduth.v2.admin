@@ -1,0 +1,25 @@
+ion-content {
+
+  ion-card {
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    left: 47%;
+    position: absolute;
+
+    max-width: 320px;
+    min-width: 200px;
+
+    ion-card-header {
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 0px;
+    }
+
+    ion-card-content {
+
+      ion-button {
+        margin-top: 10px;
+      }
+    }
+  }
+}

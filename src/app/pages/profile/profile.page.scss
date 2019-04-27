@@ -1,0 +1,42 @@
+ion-header {
+  height: 30%;
+  min-height: 150px;
+  background-image: url('./../../../assets/img/sign-in.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  position: relative;
+
+  ion-avatar {
+    height: 120px;
+    width: 120px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+ion-content {
+  --background: var(--custom-color-lightgray);
+
+  ion-list {
+    padding: 0px;
+  }
+
+  ion-list-header {
+    max-height: 12px;
+    min-height: 12px;
+  }
+
+  .info-list {
+    ion-item {
+      ion-label {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+}

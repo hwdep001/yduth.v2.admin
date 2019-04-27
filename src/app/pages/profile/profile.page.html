@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-avatar slot="start" class="cursor" (click)="closeMenu()"
+    [routerLink]="[pageInfo.photo.url, user.photo ? user.photo : '']" routerDirection="forward">
+    <img [src]="user.photo ? user.photo : 'assets/img/google_default_photo.jpg'">
+  </ion-avatar>
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" (click)="presentPhotoAs()">
+    <ion-fab-button size="small" color="light">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content class="user-select">
+
+  <ion-list class="info-list">
+    <ion-item>
+      <ion-label position="stacked">이메일</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email" disabled="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">닉네임</ion-label>
+      <ion-input type="text" [(ngModel)]="newNickname" minlength="2" maxlength="12" [disabled]="nicknameDisabled"></ion-input>
+      <ng-container *ngIf="nicknameDisabled">
+        <ion-icon name="create" slot="end" class="cursor" (click)="nicknameDisabled=false"></ion-icon>
+      </ng-container>
+      <ng-container *ngIf="!nicknameDisabled">
+        <ion-icon name="close" slot="end" class="cursor" (click)="cancelNinkname()"></ion-icon>
+        <ion-icon name="checkmark" slot="end" color="secondary" class="cursor" (click)="updateNickname()"></ion-icon>
+      </ng-container>
+    </ion-item>
+  </ion-list>
+
+  <ion-list class="fun-list">
+    <ion-list-header></ion-list-header>
+    <ion-item>
+      <ion-label>
+        회원탈퇴
+      </ion-label>
+      <ion-icon name="trash" slot="end" color="danger" class="cursor" (click)="withdraw()"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" (click)="signOut()">
+      <ion-label>
+        로그아웃
+      </ion-label>
+      <ion-icon name="log-out" slot="end" color="primary" class="cursor"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

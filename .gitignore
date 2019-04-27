@@ -3,6 +3,8 @@
 
 src/environments/
 google-services.json
+note.txt
+src/assets/devAppTest.json
 
 *~
 *.sw[mnpcod]

@@ -1,0 +1,19 @@
+.btn-div {
+    background: #0e0e0e !important;
+    ion-buttons {
+        color: white;
+    }
+}
+    
+.img-div {
+    background: #0e0e0e !important;
+    height: 100%;
+    position: relative;
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

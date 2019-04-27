@@ -1,0 +1,24 @@
+ion-toolbar {
+
+  margin: 12px;
+  --background: rgba(0,0,0,0);
+  --border-color: rgba(0,0,0,0);
+
+  ion-item {
+    --padding-start: 0px;
+    --background: rgba(0,0,0,0);
+    --border-color: rgba(0,0,0,0);
+
+    ion-avatar {
+      margin: 0px;
+      width: 50px !important;
+      height: 50px !important;
+      max-width: 50px !important;  //any size
+      max-height: 50px !important; //any size
+    }
+
+    ion-label {
+      margin-left: 10px;
+    }
+  }
+}

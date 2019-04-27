@@ -1,0 +1,13 @@
+<ion-toolbar *ngIf="user">
+  <ion-item lines="none">
+    <ion-avatar slot="start" class="cursor" (click)="closeMenu()"
+      [routerLink]="[pageInfo.photo.url, user.photo ? user.photo : '']" routerDirection="forward">
+      <img [src]="user.photo ? user.photo : 'assets/img/google_default_photo.jpg'">
+    </ion-avatar>
+    <ion-label class="cursor" (click)="closeMenu()"
+        [routerLink]="[pageInfo.profile.url]" routerDirection="root">
+      <h3>{{user.nickname}}</h3>
+      <p>{{user.email}}</p>
+    </ion-label>
+  </ion-item>
+</ion-toolbar>
