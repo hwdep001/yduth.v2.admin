@@ -1,6 +1,8 @@
 {
   "name": "htudy-v2-admin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "99c87e28"
 }
