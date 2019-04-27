@@ -145,19 +145,6 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  withdraw() {
-    this.getWithdrawAlert(() => {
-      this.userService.withdraw().then((rd: ResponseData) => {
-        if (rd.res) {
-          this.authService.signOut();
-          this.cmnService.presentSucToast('탈퇴 성공');
-        } else {
-          this.cmnService.presentErrToast(rd.toErrString());
-        }
-      });
-    });
-  }
-
   private async getWithdrawAlert(withdrawHandler: any) {
     const alert = await this.alertCtrl.create({
       header: '회원 탈퇴',

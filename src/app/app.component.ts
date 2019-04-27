@@ -44,8 +44,7 @@ export class AppComponent {
     const p = environment.pageInfo;
     const pagesMap = new Map<string, PageInterface>();
     pagesMap.set('home', { title: '홈', url: p.home.url, icon: 'home' });
-    pagesMap.set('cat-list', { title: '단어장', url: p.catList.url, icon: 'pricetags' });
-    pagesMap.set('group-list', { title: '그룹', url: p.groupList.url, icon: 'people' });
+    pagesMap.set('user-mng', { title: '사용자 관리', url: p.userMng.url, icon: 'people' });
     pagesMap.set('profile', { title: '프로필', url: p.profile.url, icon: 'person' });
     pagesMap.set('temp', { title: 'temp', url: p.temp.url, icon: 'settings' });
     this.pagesMap = pagesMap;
@@ -104,8 +103,7 @@ export class AppComponent {
 
       let pages = new Array<PageInterface>();
       pages.push(this.pagesMap.get('home'));
-      pages.push(this.pagesMap.get('cat-list'));
-      pages.push(this.pagesMap.get('group-list'));
+      pages.push(this.pagesMap.get('user-mng'));
       menus.push({ title: '메뉴', pages});
 
       pages = [];

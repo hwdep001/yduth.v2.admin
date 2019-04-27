@@ -68,22 +68,4 @@ export class UserService {
     return rd;
   }
 
-  async withdraw(): Promise<ResponseData> {
-
-    const idToken: string = await this.authService.getIdToken();
-    let rd = new ResponseData({});
-
-    await this.http.delete(`${this.apiServerUrl}/user/withdraw`, {
-        headers: new HttpHeaders().set('Authorization', idToken)
-    }).toPromise().then(reponse => {
-      rd = new ResponseData(reponse);
-    }).catch((err: HttpErrorResponse) => {
-      rd.code = err.status;
-      rd.msg = err.statusText;
-      console.log(err);
-    });
-
-    return rd;
-  }
-
 }

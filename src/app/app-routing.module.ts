@@ -23,13 +23,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: p.catList.path,
-    loadChildren: './pages/cat-list/cat-list.module#CatListPageModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: p.groupList.path,
-    loadChildren: './pages/group-list/group-list.module#GroupListPageModule',
+    path: p.userMng.path,
+    loadChildren: './pages/user-mng/user-mng.module#UserMngPageModule',
     canActivate: [AuthGuard]
   },
   {

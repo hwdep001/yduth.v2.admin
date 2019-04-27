@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatListPage } from './cat-list.page';
+import { UserMngPage } from './user-mng.page';
 
-describe('CatListPage', () => {
-  let component: CatListPage;
-  let fixture: ComponentFixture<CatListPage>;
+describe('UserMngPage', () => {
+  let component: UserMngPage;
+  let fixture: ComponentFixture<UserMngPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CatListPage ],
+      declarations: [ UserMngPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CatListPage);
+    fixture = TestBed.createComponent(UserMngPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
