@@ -6,8 +6,6 @@ import { environment } from 'src/environments/environment';
 
 import { AuthService } from './auth.service';
 
-import { User } from './../models/User';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,6 +54,42 @@ export class UserService {
     };
 
     await this.http.patch(`${this.apiServerUrl}/user/photo`, data, {
+        headers: new HttpHeaders().set('Authorization', idToken)
+    }).toPromise().then(reponse => {
+      rd = new ResponseData(reponse);
+    }).catch((err: HttpErrorResponse) => {
+      rd.code = err.status;
+      rd.msg = err.statusText;
+      console.log(err);
+    });
+
+    return rd;
+  }
+
+  async delete(uid: string): Promise<ResponseData> {
+
+    const idToken: string = await this.authService.getIdToken();
+    let rd = new ResponseData({});
+
+    await this.http.delete(`${this.apiServerUrl}/ad/user/${uid}`, {
+        headers: new HttpHeaders().set('Authorization', idToken)
+    }).toPromise().then(reponse => {
+      rd = new ResponseData(reponse);
+    }).catch((err: HttpErrorResponse) => {
+      rd.code = err.status;
+      rd.msg = err.statusText;
+      console.log(err);
+    });
+
+    return rd;
+  }
+
+  async getUserList(): Promise<ResponseData> {
+
+    const idToken: string = await this.authService.getIdToken();
+    let rd = new ResponseData({});
+
+    await this.http.get(`${this.apiServerUrl}/ad/users`, {
         headers: new HttpHeaders().set('Authorization', idToken)
     }).toPromise().then(reponse => {
       rd = new ResponseData(reponse);

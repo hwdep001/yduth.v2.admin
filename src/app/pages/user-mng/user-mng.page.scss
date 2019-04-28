@@ -1,0 +1,35 @@
+ion-header {
+  ion-toolbar {
+    .search-btn {
+      height: 32px;
+      width: 32px;
+
+      ion-icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+}
+
+ion-content {
+  ion-list {
+    padding: 0px;
+
+    ion-item-sliding {
+      ion-item {
+        // .l-label {}
+        .r-label {
+          text-align: right;
+          max-width: 25%;
+          margin-left: 10px;
+        }
+      }
+      ion-item-options {
+        ion-item-option {
+          width: 65px;
+        }
+      }
+    }
+  }
+}

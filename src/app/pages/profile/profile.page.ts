@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, AlertController, ActionSheetController } from '@ionic/angular';
+import { MenuController, ActionSheetController } from '@ionic/angular';
 
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +25,6 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public menuCtrl: MenuController,
-    private alertCtrl: AlertController,
     private asCtrl: ActionSheetController,
     private cmnService: CommonService,
     private authService: AuthService,
@@ -143,26 +142,6 @@ export class ProfilePage implements OnInit {
       loading.dismiss();
       this.cmnService.presentErrToast(rd.toErrString());
     }
-  }
-
-  private async getWithdrawAlert(withdrawHandler: any) {
-    const alert = await this.alertCtrl.create({
-      header: '회원 탈퇴',
-      message: '탈퇴하시겠습니까?',
-      buttons: [
-        {
-          text: '취소',
-          role: 'cancel'
-        }, {
-          text: '탈퇴',
-          handler: () => {
-            withdrawHandler();
-          }
-        }
-      ]
-    });
-
-    return await alert.present();
   }
 
 }
