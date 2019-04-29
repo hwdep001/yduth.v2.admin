@@ -14,14 +14,12 @@ export class MenuHeaderComponent implements OnInit {
 
   @Input() user: User;
 
-  public pageInfo;
+  public pageInfo = environment.pageInfo;
 
   constructor(
     public router: Router,
     public menuCtrl: MenuController
-  ) {
-    this.pageInfo = environment.pageInfo;
-  }
+  ) { }
 
   ngOnInit() {}
 

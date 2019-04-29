@@ -28,6 +28,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: p.userInfo.path,
+    loadChildren: './pages/user-info/user-info.module#UserInfoPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: p.profile.path,
     loadChildren: './pages/profile/profile.module#ProfilePageModule',
     canActivate: [AuthGuard]

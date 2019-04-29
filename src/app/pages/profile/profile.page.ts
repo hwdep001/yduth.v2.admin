@@ -17,7 +17,7 @@ import { User } from './../../models/User';
 })
 export class ProfilePage implements OnInit {
 
-  public pageInfo;
+  public pageInfo = environment.pageInfo;
   public user: User = new User();
 
   public newNickname: string;
@@ -30,7 +30,6 @@ export class ProfilePage implements OnInit {
     private authService: AuthService,
     private userService: UserService
   ) {
-    this.pageInfo = environment.pageInfo;
     this.nicknameDisabled = true;
     if (this.authService.user != null) {
       this.user = this.authService.user;

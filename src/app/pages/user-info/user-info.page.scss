@@ -1,0 +1,21 @@
+ion-content {
+  --background: var(--custom-color-lightgray);
+
+  ion-list {
+    padding: 0px;
+
+    ion-list-header {
+      max-height: 30px;
+      min-height: 30px;
+    }
+
+    ion-item {
+      ion-note {
+        margin-left: 0px;
+        padding-left: 10px;
+        padding-top: 16px;
+        font-size: 13px;
+      }
+    }
+  }
+}

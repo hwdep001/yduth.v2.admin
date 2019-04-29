@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="pageInfo.userMng.path"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      사용자 정보
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="user-select">
+  <ion-list *ngIf="user">
+    <ion-list-header>Google</ion-list-header>
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="cursor"
+        [routerLink]="[pageInfo.photo.url, user.googlePhotoUrl ? user.googlePhotoUrl : '']" routerDirection="forward">
+        <img [src]="user.googlePhotoUrl ? user.googlePhotoUrl : 'assets/img/google_default_photo.jpg'">
+      </ion-avatar>
+      <ion-label>
+        {{user.googleDisplayName}}
+      </ion-label>
+    </ion-item>
+
+    <ion-list-header>Htudy</ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start" class="cursor"
+        [routerLink]="[pageInfo.photo.url, user.photo ? user.photo : '']" routerDirection="forward">
+        <img [src]="user.photo ? user.photo : 'assets/img/google_default_photo.jpg'">
+      </ion-avatar>
+      <ion-label>
+        {{user.nickname}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Uid</ion-label>
+      <ion-note slot="end">{{user.uid}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-note slot="end">{{user.email}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Creation</ion-label>
+      <ion-note slot="end">{{user.createDate | date: 'yy-MM-dd E HH:mm:ss'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Update</ion-label>
+      <ion-note slot="end">{{user.updateDate | date: 'yy-MM-dd E HH:mm:ss'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Used</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="user.used" [disabled]="user.userRole.id===3" (click)="updateUsed()"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Role</ion-label>
+      <ion-note slot="end" (click)="presentRoleAlert()">{{user.userRole.name}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

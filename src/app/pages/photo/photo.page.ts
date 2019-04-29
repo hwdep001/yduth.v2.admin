@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-photo',
@@ -8,16 +10,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PhotoPage implements OnInit {
 
+  public pageInfo = environment.pageInfo;
   public photo: string;
 
   constructor(
-    private router: ActivatedRoute
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     console.log('PhotoPage');
-    this.photo = this.router.snapshot.paramMap.get('photo');
+    this.photo = this.route.snapshot.paramMap.get('photo');
   }
 
   showPhoto(): string {

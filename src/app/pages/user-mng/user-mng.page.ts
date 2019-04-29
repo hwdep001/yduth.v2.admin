@@ -17,7 +17,7 @@ import { ResponseData } from 'src/app/models/ResponseData';
 export class UserMngPage implements OnInit {
 
   @ViewChild('searchbar') searchbar: IonSearchbar;
-  public pageInfo;
+  public pageInfo = environment.pageInfo;
 
   public userList: Array<User>;
   public loadedUserList: Array<User>;
@@ -27,9 +27,7 @@ export class UserMngPage implements OnInit {
     private alertCtrl: AlertController,
     private cmnService: CommonService,
     private userService: UserService
-  ) {
-    this.pageInfo = environment.pageInfo;
-  }
+  ) { }
 
   async ngOnInit() {
     const loading = await this.cmnService.getLoading();
@@ -39,8 +37,6 @@ export class UserMngPage implements OnInit {
     await this.getUserList()
       .then(() => loading.dismiss())
       .catch(() => loading.dismiss());
-
-    loading.dismiss();
   }
 
   async getUserList(): Promise<any> {
