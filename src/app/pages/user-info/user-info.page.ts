@@ -71,6 +71,11 @@ export class UserInfoPage implements OnInit {
   }
 
   async updateUserRole(userRole: UserRole) {
+
+    if (this.user.userRole.id === userRole.id) {
+      return;
+    }
+
     const loading = await this.cmnService.getLoading();
     loading.present();
     const rd = await this.userService.updateUserRole(this.user.uid, userRole.id);
