@@ -5,8 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 import { CommonService } from './../../services/common.service';
-import { UserService } from './../../services/user.service';
-import { UserRoleService } from './../../services/user-role.service';
+import { UserMngService } from './../../services/user-mng.service';
 
 import { User } from 'src/app/models/User';
 import { UserRole } from './../../models/UserRole';
@@ -25,8 +24,7 @@ export class UserInfoPage implements OnInit {
     private router: ActivatedRoute,
     private alertCtrl: AlertController,
     private cmnService: CommonService,
-    private userService: UserService,
-    private urService: UserRoleService
+    private userService: UserMngService
   ) {
   }
 
@@ -92,7 +90,7 @@ export class UserInfoPage implements OnInit {
 
   async getUserRoleList(): Promise<Array<UserRole>> {
     let result = new Array<UserRole>();
-    const rd = await this.urService.getUserRoleList();
+    const rd = await this.userService.getUserRoleList();
 
     if (rd.res) {
       result = rd.data;

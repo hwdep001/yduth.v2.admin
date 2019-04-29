@@ -41,7 +41,7 @@
           <ion-icon slot="top" name="information-circle"></ion-icon>
           INFO
         </ion-item-option>
-        <ion-item-option color="medium">
+        <ion-item-option color="medium" [routerLink]="[pageInfo.subRule.url, user.uid]" routerDirection="forward">
           <ion-icon slot="top" name="eye"></ion-icon>
           ROLE
         </ion-item-option>

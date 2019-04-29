@@ -1,0 +1,35 @@
+ion-header {
+  ion-toolbar {
+    .update-btn {
+      height: 32px;
+      width: 32px;
+
+      ion-icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: var(--custom-color-lightgray);
+
+  .all-list {
+    
+    ion-list-header {
+      --background: #cbccd2;
+      max-height: 42px;
+      min-height: 42px;
+    }
+  }
+
+  ion-list {
+    padding: 0px;
+
+    ion-list-header {
+      max-height: 32px;
+      min-height: 32px;
+    }
+  }
+}

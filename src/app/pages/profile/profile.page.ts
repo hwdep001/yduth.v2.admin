@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 import { CommonService } from './../../services/common.service';
 import { AuthService } from './../../services/auth.service';
-import { UserService } from './../../services/user.service';
+import { UserMngService } from './../../services/user-mng.service';
 
 import { ResponseData } from './../../models/ResponseData';
 import { User } from './../../models/User';
@@ -28,7 +28,7 @@ export class ProfilePage implements OnInit {
     private asCtrl: ActionSheetController,
     private cmnService: CommonService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserMngService
   ) {
     this.nicknameDisabled = true;
     if (this.authService.user != null) {

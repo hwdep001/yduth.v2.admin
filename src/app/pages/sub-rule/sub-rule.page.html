@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="side-menu-back-btn">
+      <ion-back-button [defaultHref]="pageInfo.userMng.path"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Rule 설정
+    </ion-title>
+    <ion-buttons slot="end" class="cursor update-btn" (click)="updateSubCatRules()">
+      <ion-icon color="primary" name="checkmark"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="all-list">
+    <ion-list-header>
+      <ion-label>All</ion-label>
+      <ion-toggle color="danger" [(ngModel)]="allCheck" (click)="clickAllCheck($event)"></ion-toggle>
+    </ion-list-header>
+  </ion-list>
+  
+  <ng-container *ngIf="subCatRule">
+    <ion-list *ngFor="let sr of subCatRule.subRuleList">
+      <ion-list-header>
+        <ion-label>{{sr.subName}}</ion-label>
+        <ion-toggle color="success" [(ngModel)]="sr.subChecked" (click)="clickSubCheck($event, sr)"></ion-toggle>
+      </ion-list-header>
+      <ng-container *ngIf="sr.subChecked">
+        <ion-item *ngFor="let cr of sr.catRuleList">
+          <ion-label>{{cr.catName}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="cr.catChecked"></ion-checkbox>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </ng-container>
+</ion-content>

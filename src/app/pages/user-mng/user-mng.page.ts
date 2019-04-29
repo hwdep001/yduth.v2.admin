@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { CommonService } from './../../services/common.service';
-import { UserService } from './../../services/user.service';
+import { UserMngService } from './../../services/user-mng.service';
 
 import { User } from './../../models/User';
 import { IonSearchbar, AlertController } from '@ionic/angular';
@@ -26,7 +26,7 @@ export class UserMngPage implements OnInit {
   constructor(
     private alertCtrl: AlertController,
     private cmnService: CommonService,
-    private userService: UserService
+    private userService: UserMngService
   ) { }
 
   async ngOnInit() {

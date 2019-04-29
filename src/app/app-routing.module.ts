@@ -33,6 +33,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: p.subRule.path,
+    loadChildren: './pages/sub-rule/sub-rule.module#SubRulePageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: p.profile.path,
     loadChildren: './pages/profile/profile.module#ProfilePageModule',
     canActivate: [AuthGuard]
