@@ -27,7 +27,7 @@
         <ion-toggle color="success" [(ngModel)]="sr.subChecked" (click)="clickSubCheck($event, sr)"></ion-toggle>
       </ion-list-header>
       <ng-container *ngIf="sr.subChecked">
-        <ion-item *ngFor="let cr of sr.catRuleList">
+        <ion-item *ngFor="let cr of sr.catRuleList" [class]="cr.catUsed ? 'cr-true' : 'cr-false'">
           <ion-label>{{cr.catName}}</ion-label>
           <ion-checkbox slot="end" [(ngModel)]="cr.catChecked"></ion-checkbox>
         </ion-item>
