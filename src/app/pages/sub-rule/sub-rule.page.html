@@ -4,7 +4,7 @@
       <ion-back-button [defaultHref]="pageInfo.userMng.path"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Rule 설정
+      Rule Setting
     </ion-title>
     <ion-buttons slot="end" class="cursor update-btn" (click)="updateSubCatRules()">
       <ion-icon color="primary" name="checkmark"></ion-icon>
@@ -29,7 +29,7 @@
       <ng-container *ngIf="sr.subChecked">
         <ion-item *ngFor="let cr of sr.catRuleList" [class]="cr.catUsed ? 'cr-true' : 'cr-false'">
           <ion-label>{{cr.catName}}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="cr.catChecked"></ion-checkbox>
+          <ion-checkbox slot="end" [(ngModel)]="cr.catChecked" (click)="clickCatCheck($event, cr)"></ion-checkbox>
         </ion-item>
       </ng-container>
     </ion-list>

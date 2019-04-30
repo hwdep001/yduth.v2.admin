@@ -7,6 +7,7 @@ import { UserMngService } from 'src/app/services/user-mng.service';
 
 import { SubCatRule } from 'src/app/models/SubCatRule';
 import { SubRule } from 'src/app/models/SubRule';
+import { CatRule } from './../../models/CatRule';
 
 @Component({
   selector: 'app-sub-rule',
@@ -43,20 +44,27 @@ export class SubRulePage implements OnInit {
       .then(rd => {
         if (rd.res) {
           this.subCatRule = rd.data;
-          this.initAllCheck();
+          this.setAllCheckToggle();
         } else {
           alert(rd.toErrString());
         }
       }). catch(err => alert(err));
   }
 
-  initAllCheck(): void {
+  setAllCheckToggle(): void {
     let result = true;
 
     for (const sr of this.subCatRule.subRuleList) {
       if (!sr.subChecked) {
         result = false;
         break;
+      } else {
+        for (const cr of sr.catRuleList) {
+          if (!cr.catChecked) {
+            result = false;
+            break;
+          }
+        }
       }
     }
 
@@ -78,8 +86,20 @@ export class SubRulePage implements OnInit {
     const checkVal = !ev.target.checked;
 
     for (const cr of sr.catRuleList) {
-        cr.catChecked = checkVal;
+      cr.catChecked = checkVal;
     }
+
+    sr.subChecked = checkVal;
+    this.setAllCheckToggle();
+    sr.subChecked = !checkVal;
+  }
+
+  clickCatCheck(ev, cr: CatRule) {
+    const checkVal = !ev.target.checked;
+
+    cr.catChecked = checkVal;
+    this.setAllCheckToggle();
+    cr.catChecked = !checkVal;
   }
 
   async updateSubCatRules() {
