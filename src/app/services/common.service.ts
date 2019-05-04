@@ -11,6 +11,21 @@ export class CommonService {
     private toastCtrl: ToastController
   ) { }
 
+  async presentNotiToast(header: string, message: string) {
+    const toast = await this.toastCtrl.create({
+      header,
+      message,
+      position: 'top',
+      color: 'medium',
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: 'Close',
+      animated: true,
+      translucent: true
+    });
+    toast.present();
+  }
+
   async presentSucToast(message: string) {
     const toast = await this.toastCtrl.create({
       message,

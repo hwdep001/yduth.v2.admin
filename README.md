@@ -47,3 +47,10 @@ $ npm install firebase @angular/fire --save
 $ ionic cordova plugin add cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=yourReversedClientID --variable WEB_APPLICATION_CLIENT_ID=yourwebapplicationclientid
 $ npm install --save @ionic-native/google-plus
 ```
+
+
+## [FCM](https://ionicframework.com/docs/native/fcm)
+```
+$ ionic cordova plugin add cordova-plugin-fcm-with-dependecy-updated
+$ npm install @ionic-native/fcm
+```

@@ -7,6 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { environment } from 'src/environments/environment';
 
+// services
+import { CommonService } from './services/common.service';
+import { FcmService } from './services/fcm.service';
+
 // models
 import { User } from './models/User';
 
@@ -21,6 +25,7 @@ export class AppComponent {
   timePeriodToExitAlert = 1000;
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
 
+  private pageInfo = environment.pageInfo;
   public menuDisabled = true;
   public menus = new Array<MenuInterface>();
   private pagesMap: Map<string, PageInterface>;
@@ -35,18 +40,19 @@ export class AppComponent {
     private router: Router,
     private alertCtrl: AlertController,
     private menu: MenuController,
+    private fcmService: FcmService,
+    private cmnService: CommonService
   ) {
     this.initializePages();
     this.initializeApp();
   }
 
   initializePages(): void {
-    const p = environment.pageInfo;
     const pagesMap = new Map<string, PageInterface>();
-    pagesMap.set('home', { title: '홈', url: p.home.url, icon: 'home' });
-    pagesMap.set('user-mng', { title: '사용자 관리', url: p.userMng.url, icon: 'people' });
-    pagesMap.set('profile', { title: '프로필', url: p.profile.url, icon: 'person' });
-    pagesMap.set('temp', { title: 'temp', url: p.temp.url, icon: 'settings' });
+    pagesMap.set('home', { title: '홈', url: this.pageInfo.home.url, icon: 'home' });
+    pagesMap.set('user-mng', { title: '사용자 관리', url: this.pageInfo.userMng.url, icon: 'people' });
+    pagesMap.set('profile', { title: '프로필', url: this.pageInfo.profile.url, icon: 'person' });
+    pagesMap.set('temp', { title: 'temp', url: this.pageInfo.temp.url, icon: 'settings' });
     this.pagesMap = pagesMap;
   }
 
@@ -60,10 +66,12 @@ export class AppComponent {
 
       if (this.platform.is('cordova')) {
         this.statusBar.styleLightContent();
+        this.subscribeNotification();   // fcm 구독
+        this.subscribeTokenReg();       // fcm token 등록 이벤트 구독
       }
 
-      this.subscribeBackButton();
-      this.subscribeActiveMenu();
+      this.subscribeBackButton();       // 백버튼 이벤트 구독
+      this.subscribeActiveMenu();       // 메뉴 세팅 이벤트 구독
     });
   }
 
@@ -114,6 +122,25 @@ export class AppComponent {
       this.menus = menus;
       this.menuDisabled = false;
     }
+  }
+
+  subscribeNotification() {
+    this.fcmService.subscribeToTopic('sign-up');
+    this.fcmService.onNotification().subscribe(data => {
+
+      if (data.wasTapped) {
+        // console.log('Received in background');
+      } else {
+        // console.log('Received in foreground');
+        this.cmnService.presentNotiToast(data.title, data.body);
+      }
+    });
+  }
+
+  subscribeTokenReg() {
+    this.events.subscribe('token-reg', (fireUser: firebase.User) => {
+      this.fcmService.getToken(fireUser);
+    });
   }
 
   subscribeBackButton(): void {

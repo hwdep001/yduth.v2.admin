@@ -56,6 +56,7 @@ export class AuthGuard implements CanActivate {
          */
         if (fireUser != null && this.authService.user == null) {
           await this.authService.updateSignInInfo();
+          this.events.publish('token-reg', fireUser); // fcm token 이벤트 실행
         }
         const user: User = this.authService.user;
 

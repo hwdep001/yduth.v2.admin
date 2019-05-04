@@ -13,8 +13,10 @@ import { MenuHeaderComponent } from './components/menu-header/menu-header.compon
 import { MenuContentComponent } from './components/menu-content/menu-content.component';
 
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from './../environments/environment';
@@ -32,6 +34,7 @@ import { environment } from './../environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule
   ],
@@ -39,7 +42,8 @@ import { environment } from './../environments/environment';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    GooglePlus
+    GooglePlus,
+    FCM
   ],
   bootstrap: [AppComponent]
 })
