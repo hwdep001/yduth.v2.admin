@@ -29,7 +29,11 @@ export class UserMngPage implements OnInit {
     private userService: UserMngService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.initData();
+  }
+
+  async initData() {
     const loading = await this.cmnService.getLoading();
     loading.present();
 
@@ -88,7 +92,7 @@ export class UserMngPage implements OnInit {
       this.userService.delete(uid).then((rd: ResponseData) => {
         if (rd.res) {
           this.cmnService.presentSucToast('삭제 성공');
-          this.ngOnInit();
+          this.initData();
         } else {
           this.cmnService.presentErrToast(rd.toErrString());
         }

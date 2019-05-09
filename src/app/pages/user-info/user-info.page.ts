@@ -28,7 +28,11 @@ export class UserInfoPage implements OnInit {
   ) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.initData();
+  }
+
+  async initData() {
     const loading = await this.cmnService.getLoading();
     loading.present();
 
