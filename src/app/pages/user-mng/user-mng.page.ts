@@ -47,7 +47,7 @@ export class UserMngPage implements OnInit {
     return await this.userService.getUserList()
       .then(rd => {
         if (rd.res) {
-          this.loadedUserList = rd.data;
+          this.loadedUserList = rd.data as Array<User>;
           this.initializeUsers();
         } else {
           alert(rd.toErrString());
