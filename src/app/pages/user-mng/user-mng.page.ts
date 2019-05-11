@@ -14,7 +14,7 @@ import { ResponseData } from 'src/app/models/ResponseData';
   templateUrl: './user-mng.page.html',
   styleUrls: ['./user-mng.page.scss'],
 })
-export class UserMngPage implements OnInit {
+export class UserMngPage {
 
   @ViewChild('searchbar') searchbar: IonSearchbar;
   public pageInfo = environment.pageInfo;
@@ -29,7 +29,7 @@ export class UserMngPage implements OnInit {
     private userService: UserMngService
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.initData();
   }
 
