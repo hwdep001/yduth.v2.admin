@@ -21,15 +21,15 @@
   </ion-list>
   
   <ng-container *ngIf="subCatRule">
-    <ion-list *ngFor="let sr of subCatRule.subRuleList">
+    <ion-list *ngFor="let sub of subCatRule.subList">
       <ion-list-header>
-        <ion-label>{{sr.subName}}</ion-label>
-        <ion-toggle color="success" [(ngModel)]="sr.subChecked" (click)="clickSubCheck($event, sr)"></ion-toggle>
+        <ion-label>{{sub.name}}</ion-label>
+        <ion-toggle color="success" [(ngModel)]="sub.subRule.checked" (click)="clickSubCheck($event, sub)"></ion-toggle>
       </ion-list-header>
-      <ng-container *ngIf="sr.subChecked">
-        <ion-item *ngFor="let cr of sr.catRuleList" [class]="cr.catUsed ? 'cr-true' : 'cr-false'">
-          <ion-label>{{cr.catName}}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="cr.catChecked" (click)="clickCatCheck($event, cr)"></ion-checkbox>
+      <ng-container *ngIf="sub.subRule.checked">
+        <ion-item *ngFor="let cat of sub.catList">
+          <ion-label>{{cat.name}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="cat.catRule.checked" (click)="clickCatCheck($event, cat)"></ion-checkbox>
         </ion-item>
       </ng-container>
     </ion-list>
