@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 import { ResponseData } from '../models/ResponseData';
 import { UserRole } from './../models/UserRole';
-import { SubCatRule } from '../models/SubCatRule';
+import { SubRule } from './../models/SubRule';
 
 @Injectable({
   providedIn: 'root'
@@ -189,12 +189,12 @@ export class UserMngService {
     return rd;
   }
 
-  async updateSubCatRules(subCatRule: SubCatRule): Promise<ResponseData> {
+  async updateSubCatRules(subRuleList: Array<SubRule>): Promise<ResponseData> {
 
     const idToken: string = await this.authService.getIdToken();
     let rd = new ResponseData({});
 
-    const data = subCatRule;
+    const data = subRuleList;
 
     await this.http.put(`${this.apiServerUrl}/ad/sc-rules`, data, {
         headers: new HttpHeaders().set('Authorization', idToken)

@@ -12,7 +12,6 @@ import { CommonService } from './common.service';
 
 import { ResponseData } from './../models/ResponseData';
 import { User } from './../models/User';
-import { Sub } from './../models/Sub';
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +60,8 @@ export class AuthService {
     return this.existUser ? this.userInfo.photo : null;
   }
 
-  get subList(): Array<Sub> {
-    return this.existUser ? this.userInfo.subList : new Array<Sub>();
+  get subIdList(): Array<string> {
+    return this.existUser ? this.userInfo.subIdList : new Array<string>();
   }
 
   setUser(user: User) {

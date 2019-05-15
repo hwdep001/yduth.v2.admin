@@ -1,5 +1,4 @@
 import { UserRole } from './UserRole';
-import { Sub } from './Sub';
 
 export class User {
     uid: string;
@@ -13,5 +12,5 @@ export class User {
     used: boolean;
 
     userRole: UserRole;
-    subList: Array<Sub>;
+    subIdList: Array<string>;
 }

@@ -106,6 +106,10 @@ export class UserInfoPage implements OnInit {
   }
 
   async presentRoleAlert() {
+    if (this.user.userRole.id === 3) {
+      return ;
+    }
+
     const loading = await this.cmnService.getLoading();
     loading.present();
 

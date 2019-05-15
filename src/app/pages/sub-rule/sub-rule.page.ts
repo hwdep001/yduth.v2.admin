@@ -5,9 +5,8 @@ import { environment } from 'src/environments/environment';
 import { CommonService } from './../../services/common.service';
 import { UserMngService } from 'src/app/services/user-mng.service';
 
-import { Sub } from './../../models/Sub';
-import { Cat } from './../../models/Cat';
-import { SubCatRule, SubRule, CatRule } from 'src/app/models/SubCatRule';
+import { SubRule } from './../../models/SubRule';
+import { CatRule } from 'src/app/models/CatRule';
 
 @Component({
   selector: 'app-sub-rule',
@@ -18,7 +17,7 @@ export class SubRulePage implements OnInit {
 
   public pageInfo = environment.pageInfo;
   public uid: string;
-  public subCatRule: SubCatRule;
+  public subRuleList: Array<SubRule>;
   public allCheck: boolean;
 
   constructor(
@@ -47,42 +46,7 @@ export class SubRulePage implements OnInit {
     return await this.userService.getSubCatRules(this.uid)
       .then(rd => {
         if (rd.res) {
-          const subCatRule = rd.data as SubCatRule;
-
-          const srMap = new Map<string, SubRule>();
-          const crMap = new Map<string, CatRule>();
-          subCatRule.subRuleList.forEach(subRule => {
-            subRule.checked = true;
-            srMap.set(subRule.sub.id, subRule);
-
-            subRule.catRuleList.forEach(catRule => {
-              catRule.checked = true;
-              crMap.set(`${subRule.id}_${catRule.cat.id}`, catRule);
-            });
-          });
-
-          for (const sub of subCatRule.subList) {
-            let sr = srMap.get(sub.id);
-
-            for (const cat of sub.catList) {
-              let cr = new CatRule();
-              if (sr != null) {
-                cr = crMap.get(`${sr.id}_${cat.id}`);
-                if (cr == null) {
-                  cr = new CatRule();
-                }
-              }
-
-              cat.catRule = cr;
-            }
-
-            if (sr == null) {
-              sr = new SubRule();
-            }
-            sub.subRule = sr;
-          }
-
-          this.subCatRule = subCatRule;
+          this.subRuleList = rd.data as Array<SubRule>;
           this.setAllCheckToggle();
         } else {
           alert(rd.toErrString());
@@ -93,13 +57,13 @@ export class SubRulePage implements OnInit {
   setAllCheckToggle(): void {
     let result = true;
 
-    for (const sub of this.subCatRule.subList) {
-      if (!sub.subRule.checked) {
+    for (const sr of this.subRuleList) {
+      if (!sr.checked) {
         result = false;
         break;
       } else {
-        for (const cat of sub.catList) {
-          if (!cat.catRule.checked) {
+        for (const cr of sr.catRuleList) {
+          if (!cr.checked) {
             result = false;
             break;
           }
@@ -113,81 +77,57 @@ export class SubRulePage implements OnInit {
   clickAllCheck(ev) {
     const checkVal = !ev.target.checked;
 
-    for (const sub of this.subCatRule.subList) {
-      sub.subRule.checked = checkVal;
-      for (const cat of sub.catList) {
-        cat.catRule.checked = checkVal;
+    for (const sr of this.subRuleList) {
+      sr.checked = checkVal;
+      for (const cr of sr.catRuleList) {
+        cr.checked = checkVal;
       }
     }
   }
 
-  clickSubCheck(ev, sub: Sub) {
+  clickSubCheck(ev, sr: SubRule) {
     const checkVal = !ev.target.checked;
 
-    for (const cat of sub.catList) {
-      cat.catRule.checked = checkVal;
+    for (const cr of sr.catRuleList) {
+      cr.checked = checkVal;
     }
 
-    sub.subRule.checked = checkVal;
+    sr.checked = checkVal;
     this.setAllCheckToggle();
-    sub.subRule.checked = !checkVal;
+    sr.checked = !checkVal;
   }
 
-  clickCatCheck(ev, cat: Cat) {
+  clickCatCheck(ev, cr: CatRule) {
     const checkVal = !ev.target.checked;
 
-    cat.catRule.checked = checkVal;
+    cr.checked = checkVal;
     this.setAllCheckToggle();
-    cat.catRule.checked = !checkVal;
+    cr.checked = !checkVal;
   }
 
   async updateSubCatRules() {
     const loading = await this.cmnService.getLoading();
     loading.present();
 
-    const subRuleList = new Array<SubRule>();
-    let catRuleList = null;
-    for (const sub of this.subCatRule.subList) {
-      if (!sub.subRule.checked) {
-        continue;
+    for (const sr of this.subRuleList) {
+      sr.uid = this.uid;
+
+      for (const cr of sr.catRuleList) {
+        cr.uid = this.uid;
       }
-
-      catRuleList = new Array<CatRule>();
-      for (const cat of sub.catList) {
-        const tempCat = Object.assign({}, cat);  // 순환참조 방지
-        tempCat.catRule = null;
-
-        if (cat.catRule.checked) {
-          cat.catRule.cat = tempCat;
-          catRuleList.push(cat.catRule);
-        }
-      }
-
-      const tempSub = Object.assign({}, sub);  // 순환참조 방지
-      tempSub.catList = null;
-      tempSub.subRule = null;
-      sub.subRule.sub = tempSub;
-
-      sub.subRule.uid = this.uid;
-      sub.subRule.catRuleList = catRuleList;
-      subRuleList.push(sub.subRule);
     }
 
-    const scr = new SubCatRule();
-    scr.subRuleList = subRuleList;
-    scr.uid = this.uid;
-
-    const rd = await this.userService.updateSubCatRules(scr);
+    const rd = await this.userService.updateSubCatRules(this.subRuleList);
 
     if (rd.res) {
       this.cmnService.presentSucToast('저장');
-      await this.getSubCatRules()
-        .then(() => loading.dismiss())
-        .catch(() => loading.dismiss());
     } else {
-      loading.dismiss();
       this.cmnService.presentErrToast(rd.toErrString());
     }
+
+    await this.getSubCatRules()
+      .then(() => loading.dismiss())
+      .catch(() => loading.dismiss());
   }
 
 }
