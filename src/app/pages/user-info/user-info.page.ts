@@ -21,7 +21,7 @@ export class UserInfoPage implements OnInit {
   public user: User;
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
     private alertCtrl: AlertController,
     private cmnService: CommonService,
     private userService: UserMngService
@@ -36,7 +36,7 @@ export class UserInfoPage implements OnInit {
     const loading = await this.cmnService.getLoading();
     loading.present();
 
-    const uid: string = this.router.snapshot.paramMap.get('uid');
+    const uid: string = this.route.snapshot.params.uid;
 
     await this.getUser(uid)
     .then(() => loading.dismiss())

@@ -21,7 +21,7 @@ export class SubRulePage implements OnInit {
   public allCheck: boolean;
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
     private cmnService: CommonService,
     private userService: UserMngService
   ) {
@@ -35,7 +35,7 @@ export class SubRulePage implements OnInit {
     const loading = await this.cmnService.getLoading();
     loading.present();
 
-    this.uid = this.router.snapshot.paramMap.get('uid');
+    this.uid = this.route.snapshot.params.uid;
 
     await this.getSubCatRules()
     .then(() => loading.dismiss())

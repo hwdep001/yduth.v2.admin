@@ -20,7 +20,7 @@ export class PhotoPage implements OnInit {
 
   ngOnInit() {
     console.log('PhotoPage');
-    this.photo = this.route.snapshot.paramMap.get('photo');
+    this.photo = this.route.snapshot.params.photo;
   }
 
   showPhoto(): string {
