@@ -20,8 +20,8 @@
 
 <ion-content class="user-select">
 
-  <ion-list *ngFor="let user of userList">
-    <ion-item-sliding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let user of userList">
       <ion-item>
         <ion-avatar slot="start" class="cursor"
           [routerLink]="[pageInfo.photo.url, user.photo ? user.photo : '']" routerDirection="forward">
