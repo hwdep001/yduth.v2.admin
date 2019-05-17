@@ -76,7 +76,7 @@ export class AuthService {
 
     let idToken;
 
-    if (environment.devAppTest) {
+    if (environment.testType === 1) {
       idToken = await fetch(environment.devAppTestFilePath).then(async response => {
         return await response.json().then(data => idToken = data.idToken);
       });

@@ -22,7 +22,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">닉네임</ion-label>
-      <ion-input type="text" [(ngModel)]="newNickname" minlength="2" maxlength="12" [disabled]="nicknameDisabled"></ion-input>
+      <ion-input type="text" [(ngModel)]="newNickname" [placeholder]="user.nickname" 
+        minlength="2" maxlength="12" [disabled]="nicknameDisabled"></ion-input>
       <ng-container *ngIf="nicknameDisabled">
         <ion-icon name="create" slot="end" class="cursor" (click)="nicknameDisabled=false"></ion-icon>
       </ng-container>

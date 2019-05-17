@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, NavigationExtras } from '@angular/router';
 import { Events } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
@@ -29,10 +29,12 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    if (environment.devAppTest) {
+    if (environment.testType === 0) {
+      return this.canActivateForApp(next, state);
+    } else if (environment.testType === 1) {
       return this.canActivateForDevApp(next, state);   // for dev app
     } else {
-      return this.canActivateForApp(next, state);
+      return this.canActivateWithoutGuard(next, state);   // without guard
     }
   }
 
@@ -111,6 +113,10 @@ export class AuthGuard implements CanActivate {
       await this.authService.updateSignInInfo();
       const user: User = this.authService.user;
 
+      const navigationExtras: NavigationExtras = {
+        skipLocationChange: true, replaceUrl: true
+      };
+
       /**
        * 로그인 했을 경우 /sign-in 접근 시 home으로 이동
        * 로그인 안했을 경우 /sign-in 페이지만 허용
@@ -120,7 +126,7 @@ export class AuthGuard implements CanActivate {
         if (state.url === this.pageInfo.signIn.url) {
           // console.log(`[auth guard1] ${state.url} - false -> home`);
           // alert(`[auth guard1] ${state.url} - false -> home`);
-          this.router.navigate([this.pageInfo.home.url]);
+          this.router.navigate([this.pageInfo.home.url], navigationExtras);
           resolve(false);
         } else {
         // 조건 2
@@ -141,10 +147,22 @@ export class AuthGuard implements CanActivate {
           // console.log(`[auth guard4] ${state.url} - false -> sign-in`);
           // alert(`[auth guard4] ${state.url} - false -> sign-in`);
           state.url = this.pageInfo.signIn.url;   // 로그인 화면에서 뒤로가기 방지용
-          this.router.navigate([this.pageInfo.signIn.url]);
+          this.router.navigate([this.pageInfo.signIn.url], navigationExtras);
           resolve(false);
         }
       }
+    });
+  }
+
+  canActivateWithoutGuard(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> {
+    return  new Promise(async (resolve, reject) => {
+      const user: User = environment.testUser as User;
+
+      this.events.publish('menu-setting', user);
+      resolve(true);
     });
   }
 }
