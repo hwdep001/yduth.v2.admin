@@ -30,16 +30,15 @@ export class ProfilePage implements OnInit {
     private cmnService: CommonService,
     private authService: AuthService,
     private userService: UserMngService
-  ) {
+  ) { }
+
+  ngOnInit() {
+    console.log('ProfilePage');
     this.nicknameDisabled = true;
     if (this.authService.user != null) {
       this.user = this.authService.user;
       this.newNickname = this.user.nickname;
     }
-  }
-
-  ngOnInit() {
-    console.log('ProfilePage');
   }
 
   closeMenu() {
