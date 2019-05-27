@@ -29,7 +29,7 @@
       <ng-container *ngIf="sr.checked">
         <ion-item *ngFor="let cr of sr.catRuleList">
           <ion-label>{{cr.catName}}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="cr.checked" (click)="clickCatCheck($event, cr)"></ion-checkbox>
+          <ion-checkbox slot="end" [color]="cr.catTypeId === 0 ? 'primary' : 'secondary'" [(ngModel)]="cr.checked" (click)="clickCatCheck($event, cr)"></ion-checkbox>
         </ion-item>
       </ng-container>
     </ion-list>

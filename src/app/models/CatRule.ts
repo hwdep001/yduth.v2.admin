@@ -5,6 +5,7 @@ export class CatRule {
     subRuleId: number;
     catId: number;
     catName: string;
+    catTypeId: number;
     checked: boolean;
 
 }
