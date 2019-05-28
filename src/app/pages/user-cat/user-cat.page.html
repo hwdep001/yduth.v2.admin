@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="side-menu-back-btn">
+      <ion-back-button [defaultHref]="pageInfo.userMng.path"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Category Setting
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="user-select">
+  <ng-container *ngIf="subList">
+    <ion-list *ngFor="let sub of subList">
+      <ion-list-header>{{sub.name}}</ion-list-header>
+      <ion-item *ngFor="let cat of sub.type1CatList; let i = index">
+        <label>{{cat.name}}</label>
+        <ion-buttons slot="end" class="cursor" (click)="presentDeleteCat(sub.id, cat.id, i)">
+            <ion-icon name="trash" color="danger"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>

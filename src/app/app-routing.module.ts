@@ -33,6 +33,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: p.userCat.path,
+    loadChildren: './pages/user-cat/user-cat.module#UserCatPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: p.subRule.path,
     loadChildren: './pages/sub-rule/sub-rule.module#SubRulePageModule',
     canActivate: [AuthGuard]
